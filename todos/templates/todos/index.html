@@ -1,64 +1,72 @@
-{% extends 'todos/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .project {
+            margin-bottom: 20px;
+        }
+        .project img {
+            max-width: 100%;
+            height: auto;
+        }
+        .project h3 {
+            margin-top: 10px;
+        }
+        .project p {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
 
-{% block title %}
-<title>Todo list</title>
-{% endblock %}
+<header>
+    <h1>My Portfolio</h1>
+</header>
 
-{% block content %}
-<div class="container">
-
-  <!-- title row -->
-  <div class="row">
-    <div class="offset-md-2 col-lg-9">
-      <div class="page-header">
-        <h1>
-          My Todo-App v2 made by Ganesh Sanap
-        </h1>
-      </div>
+<section>
+    <h2>Projects</h2>
+    <div class="project">
+        <img src="project1.jpg" alt="Project 1">
+        <h3>Project 1</h3>
+        <p>Description of project 1.</p>
     </div>
-  </div>
-
-  <!-- Add a todo row -->
-  <div class="row">
-    <div class="offset-md-2 col-lg-9">
-      <form method="post" action="{% url 'todos:add' %}">
-        {% csrf_token %}
-        <div class="form-row">
-          <div class="col-md-6">
-            <input type="text" class="form-control" name="title" placeholder="Do laundry" required>
-          </div>
-          <div class="col-md-6">
-            <button type="submit" name="submit" class="btn btn-outline-primary">
-              Add
-            </button>
-          </div>
-        </div>
-      </form>
+    <div class="project">
+        <img src="project2.jpg" alt="Project 2">
+        <h3>Project 2</h3>
+        <p>Description of project 2.</p>
     </div>
-  </div>
-  <hr />
+    <!-- Add more projects as needed -->
+</section>
 
-  <!-- todo list row -->
-  <div class="row">
-    <div class="offset-md-2 col-lg-6">
-      <div class="list-group">
-        {% for todo in todo_list %}
-        <div class="list-group-item {% if todo.isCompleted %} todo-complete {% endif %}">
-          <form style="display: inline;" method="post" action="{% url 'todos:update' todo.id %}">
-            {% csrf_token %}
-            <input type="checkbox" name="isCompleted" onchange="this.form.submit()" {% if todo.isCompleted %} checked
-              {% endif %} class="todo-status-checkbox"
-              title="{% if not todo.isCompleted %} mark as done {% else %} mark undone {% endif %}">
-          </form>
-          {{ todo.title }}
-          <a href="{% url 'todos:delete' todo.id %}" title="Delete">
-            <i class="far fa-trash-alt"></i>
-          </a>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</div>
+<footer>
+    <p>&copy; 2024 Your Name. All rights reserved.</p>
+</footer>
 
-{% endblock %}
+</body>
+</html>
